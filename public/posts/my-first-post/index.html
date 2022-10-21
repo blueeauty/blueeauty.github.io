@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>hugo 博客搭建 | 学习记录</title>
+    <meta property="og:title" content="hugo 博客搭建 - 学习记录">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2022-10-16T22:40:41&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-10-16T22:40:41&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="hugo 博客搭建">
+        
+    <meta name="author" content="">
+    <meta property="og:url" content="http://example.org/posts/my-first-post/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://example.org/">
+                        学习记录
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://example.org/">首页</a>
+                    
+                    <a  href="http://example.org/about" title="About">About</a>
+                    
+                    <a  href="http://example.org/tags/others" title="Others">Others</a>
+                    
+                    <a  href="http://example.org/tags/machine-learning" title="Machine Learning">Machine Learning</a>
+                    
+                    <a  href="http://example.org/" title="Home">Home</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">hugo 博客搭建</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年10月16日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="windows平台下安装hugo">Windows平台下安装hugo</h2>
+<p>Windows下Hugo提供了Chocolatey方式的安装，通过如下命令即可。</p>
+<pre tabindex="0"><code>choco install hugo -confirm
+</code></pre><p>验证安装安转完成后，我们打开终端，输入如下命令进行验证是否安装成功</p>
+<pre tabindex="0"><code>hugo version
+</code></pre><p>如果没问题的话，会输出Hugo的版本号等一些信息。</p>
+<p><strong>创建一个站点</strong></p>
+<pre tabindex="0"><code>hugo new site blog
+</code></pre><p><strong>添加一个主题</strong></p>
+<pre tabindex="0"><code>cd themes
+git clone https://github.com/vjeantet/hugo-theme-casper.git casper
+</code></pre><p><strong>新建文章</strong></p>
+<pre tabindex="0"><code>hugo new post/first.md
+</code></pre><p><strong>实现主题本地预览</strong></p>
+<pre tabindex="0"><code>hugo server -t casper -D
+</code></pre><h2 id="适配主题">适配主题</h2>
+<p><strong>Hugo的每个主题都会有不同的参数配置，而这些配置被存放在根目录下的<code>config.toml</code>文件中</strong></p>
+<pre tabindex="0"><code>BaseUrl= &#34;https://shanetian.github.io/&#34;
+LanguageCode= &#34;zh-cn&#34;
+Title= &#34;I am thinking ...&#34;
+theme = &#34;casper&#34;
+paginate = 5
+DisqusShortname = &#34;suixin-1&#34;  # name in comments
+Copyright = &#34;All rights reserved - 2018&#34;
+canonifyurls = true
+[params]
+  description = &#34;路在脚下，心向远方&#34;
+  metadescription = &#34;Used as &#39;description&#39; meta tag for both home and index pages. If not set, &#39;description&#39; will be used instead&#34;
+  cover = &#34;images/boy_bicycle.jpg&#34;
+  author = &#34;SuiXin&#34;
+  authorlocation = &#34;Chengdu, China&#34;
+  authorwebsite = &#34;suixinblog.cn&#34;
+  authorbio= &#34;Every man dies, not every man really lives.&#34;
+  logo = &#34;images/bird.png&#34;
+  # googleAnalyticsUserID = &#34;UA-79101-12&#34;
+  # Optional RSS-Link, if not provided it defaults to the standard index.xml
+  # RSSLink = &#34;http://feeds.feedburner.com/...&#34;
+  githubName = &#34;ShaneTian&#34;
+  email = &#34;&#34;
+  twitterName = &#34;ShaneTian6&#34;
+  # facebookName = &#34;&#34;
+  # codepenName = &#34;&#34;
+  # linkedinName = &#34;&#34;
+  # stackoverflowId = &#34;&#34;
+  # keybaseName = &#34;&#34;
+  # flickrName = &#34;&#34;
+  # instagramName = &#34;&#34;
+  # pinterestName = &#34;&#34;
+  # googlePlusName = &#34;&#34;
+  # set true if you are not proud of using Hugo (true will hide the footer note &#34;Proudly published with HUGO.....&#34;)
+  hideHUGOSupport = false
+  # Setting a value will load highlight.js and enable syntax highlighting using the style selected.
+  # See https://github.com/isagalaev/highlight.js/tree/master/src/styles for available styles
+  # A preview of above styles can be viewed at https://highlightjs.org/static/demo/
+  hjsStyle = &#34;atom-one-light&#34;
+ 
+ [params.social]
+    twitter = &#34;ShaneTian6&#34;
+[[menu.main]]
+  name = &#34;Home&#34;
+  weight = -1
+  identifier = &#34;blog&#34;
+  url = &#34;/&#34;
+
+[[menu.main]]
+  name = &#34;Machine Learning&#34;
+  weight = -2
+  identifier = &#34;ml&#34;
+  url = &#34;/tags/machine-learning&#34;
+
+[[menu.main]]
+  name = &#34;Others&#34;
+  weight = -3
+  identifier = &#34;other&#34;
+  url = &#34;/tags/others&#34;
+
+[[menu.main]]
+  name = &#34;About&#34;
+  weight = -4
+  identifier = &#34;about&#34;
+  url = &#34;/about&#34;
+
+  [permalinks]
+  post = &#34;/:year/:month/:day/:title/&#34;
+</code></pre>
+        </div>
+
+        
+
+
+        
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/hugo' target="_blank">hugo</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= ""
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+    
+    
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2022 <a href="http://example.org/">学习记录 By </a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+<style type="text/css">
+div.highlight {
+    position: relative;
+    margin: 1em 0px;
+}
+
+.copy-code {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(78, 78, 78, 0.8);
+    border-radius: var(--radius);
+    padding: 0 5px;
+    font: inherit;
+    user-select: none;
+    cursor: pointer;
+    border: 0;
+    --radius: 8px;
+}
+
+div.highlight:hover .copy-code,pre:hover .copy-code {
+    display: block;
+}
+
+</style>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='http://example.org/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://example.org/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://example.org/posts/android_develop_first/" title="Android_develop_first" target="_blank">Android_develop_first</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/posts/my-first-post/" title="hugo 博客搭建" target="_blank">hugo 博客搭建</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="http://example.org/tags/hugo/">hugo</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://example.org/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

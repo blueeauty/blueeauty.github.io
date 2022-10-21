@@ -1,4 +1,42 @@
 baseURL = 'http://example.org/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = '学习记录'
 theme = "maupassant"
+disableKinds = "false"
+summaryLength = 70
+
+[params]
+  localSearch = true
+
+[params.utteranc]
+    enable = true
+    repo = ""    # 存储评论的Repo，格式为 owner/repo
+    issueTerm = "pathname"  #表示你选择以那种方式让github issue的评论和你的文章关联。
+    theme = "github-light" # 样式主题，有github-light和github-dark两种
+
+[[menu.main]]
+  name = "Home"
+  weight = -1
+  identifier = "blog"
+  url = "/"
+
+[[menu.main]]
+  name = "Machine Learning"
+  weight = -2
+  identifier = "ml"
+  url = "/tags/machine-learning"
+
+[[menu.main]]
+  name = "Others"
+  weight = -3
+  identifier = "other"
+  url = "/tags/others"
+
+[[menu.main]]
+  name = "About"
+  weight = -4
+  identifier = "about"
+  url = "/about"
+
+  [permalinks]
+  post = "/:year/:month/:day/:title/"

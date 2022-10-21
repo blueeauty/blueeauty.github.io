@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on 学习记录</title>
+    <link>http://example.org/tags/hugo/</link>
+    <description>Recent content in hugo on 学习记录</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 16 Oct 2022 22:40:41 +0800</lastBuildDate><atom:link href="http://example.org/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hugo 博客搭建</title>
+      <link>http://example.org/posts/my-first-post/</link>
+      <pubDate>Sun, 16 Oct 2022 22:40:41 +0800</pubDate>
+      
+      <guid>http://example.org/posts/my-first-post/</guid>
+      <description>&lt;h2 id=&#34;windows平台下安装hugo&#34;&gt;Windows平台下安装hugo&lt;/h2&gt;
+&lt;p&gt;Windows下Hugo提供了Chocolatey方式的安装，通过如下命令即可。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

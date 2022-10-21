@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Android_develop_first | 学习记录</title>
+    <meta property="og:title" content="Android_develop_first - 学习记录">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2022-10-19T23:07:50&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-10-19T23:07:50&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="Android_develop_first">
+        
+    <meta name="author" content="">
+    <meta property="og:url" content="http://example.org/posts/android_develop_first/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://example.org/">
+                        学习记录
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://example.org/">首页</a>
+                    
+                    <a  href="http://example.org/about" title="About">About</a>
+                    
+                    <a  href="http://example.org/tags/others" title="Others">Others</a>
+                    
+                    <a  href="http://example.org/tags/machine-learning" title="Machine Learning">Machine Learning</a>
+                    
+                    <a  href="http://example.org/" title="Home">Home</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">Android_develop_first</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年10月19日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="什么是android">什么是Android?</h2>
+<p><strong>Android 是一个开源的，基于 Linux 的移动设备操作系统，如智能手机和平板电脑。Android 是由谷歌及其他公司带领的开放手机联盟开发的。</strong></p>
+<p><strong>Android 提供了一个统一的应用程序开发方法，这意味着开发人员只需要为 Android 进行开发，这样他们的应用程序就能够运行在不同搭载 Android 的移动设备上。</strong></p>
+<p><strong>谷歌在2007年发布了第一个测试版本的 Android 软件开发工具包（SDK），第一个商业版本的 Android 1.0，则发布于2008年9月。</strong></p>
+<p><strong>2012年6月27日，在谷歌I/O大会上，谷歌宣布发布了 Android 版本4.1 Jelly Bean。 Jelly Bean 是一个在功能和性能方面的渐进的更新，主要目的是改进用户界面，</strong></p>
+<h2 id="android-的特性">Android 的特性</h2>
+<p>Android 是一款与 Apple 4GS 竞争的功能强大的操作系统，并支持一些伟大的特性。以下列举出部分功能：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">漂亮的 UI</td>
+<td style="text-align:left">Android 操作系统的基本屏幕提供了漂亮又直观的用户界面。</td>
+</tr>
+<tr>
+<td style="text-align:left">连接性</td>
+<td style="text-align:left">GSM/EDGE, IDEN, CDMA, EV-DO, UMTS, Bluetooth, Wi-Fi, LTE, NFC 和 WiMAX.</td>
+</tr>
+<tr>
+<td style="text-align:left">存储</td>
+<td style="text-align:left">用于数据存储的轻量级关系型数据库SQLite</td>
+</tr>
+<tr>
+<td style="text-align:left">媒体支持</td>
+<td style="text-align:left">H.263, H.264, MPEG-4 SP, AMR, AMR-WB, AAC, HE-AAC, AAC 5.1, MP3, MIDI, Ogg Vorbis, WAV, JPEG, PNG, GIF, 和 BMP</td>
+</tr>
+<tr>
+<td style="text-align:left">消息</td>
+<td style="text-align:left">SMS 和 MMS</td>
+</tr>
+<tr>
+<td style="text-align:left">Web 浏览器</td>
+<td style="text-align:left">基于开源的 WebKit 布局引擎，再加上支持 HTML5 和 CSS3 Chrome 的 V8 JavaScript 引擎。</td>
+</tr>
+<tr>
+<td style="text-align:left">多点触控</td>
+<td style="text-align:left">Android原生支持多点触控，从最初的手持设备开始便有，如 HTC Hero。</td>
+</tr>
+<tr>
+<td style="text-align:left">多任务</td>
+<td style="text-align:left">用户可以跳从一个任务到另一个任务，并且相同时间可以同时运行各种应用。</td>
+</tr>
+<tr>
+<td style="text-align:left">可调整的 widgets</td>
+<td style="text-align:left">Widgets是可调整大小，这样用户就可以扩大更多的内容或缩小以节省空间。</td>
+</tr>
+<tr>
+<td style="text-align:left">多语言</td>
+<td style="text-align:left">支持单向和多向文本。</td>
+</tr>
+<tr>
+<td style="text-align:left">GCM</td>
+<td style="text-align:left">谷歌云消息（GCM）是一种服务，让开发人员对 Android 设备的用户发送短消息数据，而无需专有的同步解决方案。</td>
+</tr>
+<tr>
+<td style="text-align:left">Wi-Fi Direct</td>
+<td style="text-align:left">一种通过高带宽的对等网络连接来直接发现和配对应用的技术。</td>
+</tr>
+<tr>
+<td style="text-align:left">Android Beam</td>
+<td style="text-align:left">一个流行的基于 NFC 的技术，使用户能够即时共享，只需通过触摸 NFC 功能将两个手机连在一起。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="android-架构">Android 架构</h2>
+<p><strong>Android 操作系统是一个软件组件的栈，在架构图中它大致可以分为五个部分和四个主要层。</strong></p>
+<p>
+        <img class="mx-auto" alt="" src="/img/1.png" />   
+    </p>
+        </div>
+
+        
+
+
+        
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= ""
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+    
+    
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2022 <a href="http://example.org/">学习记录 By </a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+<style type="text/css">
+div.highlight {
+    position: relative;
+    margin: 1em 0px;
+}
+
+.copy-code {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(78, 78, 78, 0.8);
+    border-radius: var(--radius);
+    padding: 0 5px;
+    font: inherit;
+    user-select: none;
+    cursor: pointer;
+    border: 0;
+    --radius: 8px;
+}
+
+div.highlight:hover .copy-code,pre:hover .copy-code {
+    display: block;
+}
+
+</style>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='http://example.org/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://example.org/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://example.org/posts/android_develop_first/" title="Android_develop_first" target="_blank">Android_develop_first</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/posts/my-first-post/" title="hugo 博客搭建" target="_blank">hugo 博客搭建</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="http://example.org/tags/hugo/">hugo</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://example.org/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
