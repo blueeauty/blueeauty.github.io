@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 学习记录</title>
-    <link>http://example.org/posts/</link>
+    <link>https://blueeauty.github.io/posts/</link>
     <description>Recent content in Posts on 学习记录</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Oct 2022 23:07:50 +0800</lastBuildDate><atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Oct 2022 23:07:50 +0800</lastBuildDate><atom:link href="https://blueeauty.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Android_develop_first</title>
-      <link>http://example.org/posts/android_develop_first/</link>
+      <link>https://blueeauty.github.io/posts/android_develop_first/</link>
       <pubDate>Wed, 19 Oct 2022 23:07:50 +0800</pubDate>
       
-      <guid>http://example.org/posts/android_develop_first/</guid>
+      <guid>https://blueeauty.github.io/posts/android_develop_first/</guid>
       <description>&lt;h2 id=&#34;什么是android&#34;&gt;什么是Android?&lt;/h2&gt;</description>
     </item>
     
     <item>
       <title>hugo 博客搭建</title>
-      <link>http://example.org/posts/my-first-post/</link>
+      <link>https://blueeauty.github.io/posts/my-first-post/</link>
       <pubDate>Sun, 16 Oct 2022 22:40:41 +0800</pubDate>
       
-      <guid>http://example.org/posts/my-first-post/</guid>
+      <guid>https://blueeauty.github.io/posts/my-first-post/</guid>
       <description>&lt;h2 id=&#34;windows平台下安装hugo&#34;&gt;Windows平台下安装hugo&lt;/h2&gt;
 &lt;p&gt;Windows下Hugo提供了Chocolatey方式的安装，通过如下命令即可。&lt;/p&gt;</description>
     </item>

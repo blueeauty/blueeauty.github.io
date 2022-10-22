@@ -2,26 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/posts/android_develop_first/</loc>
+    <loc>https://blueeauty.github.io/posts/android_develop_first/</loc>
     <lastmod>2022-10-19T23:07:50+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/</loc>
+    <loc>https://blueeauty.github.io/posts/</loc>
     <lastmod>2022-10-19T23:07:50+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/</loc>
+    <loc>https://blueeauty.github.io/</loc>
     <lastmod>2022-10-19T23:07:50+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/tags/hugo/</loc>
+    <loc>https://blueeauty.github.io/tags/hugo/</loc>
     <lastmod>2022-10-16T22:40:41+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/my-first-post/</loc>
+    <loc>https://blueeauty.github.io/posts/my-first-post/</loc>
     <lastmod>2022-10-16T22:40:41+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://blueeauty.github.io/tags/</loc>
     <lastmod>2022-10-16T22:40:41+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://blueeauty.github.io/categories/</loc>
   </url><url>
-    <loc>http://example.org/search/</loc>
+    <loc>https://blueeauty.github.io/search/</loc>
   </url>
 </urlset>
