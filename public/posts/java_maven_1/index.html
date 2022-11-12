@@ -7,20 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <title>Android架构 | 学习记录</title>
-    <meta property="og:title" content="Android架构 - 学习记录">
+    <title>Java之Maven | 学习记录</title>
+    <meta property="og:title" content="Java之Maven - 学习记录">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2022-10-19T23:07:50&#43;08:00'>
+    <meta property="article:published_time" content='2022-11-12T16:44:24&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2022-10-19T23:07:50&#43;08:00'>
+    <meta property="article:modified_time" content='2022-11-12T16:44:24&#43;08:00'>
         
     <meta name="Keywords" content="">
-    <meta name="description" content="Android架构">
+    <meta name="description" content="Java之Maven">
         
     <meta name="author" content="">
-    <meta property="og:url" content="https://blueeauty.github.io/posts/android_develop_first/">
+    <meta property="og:url" content="https://blueeauty.github.io/posts/java_maven_1/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -75,120 +75,149 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">Android架构</h1>
+            <h1 class="post-title">Java之Maven</h1>
         </header>
         <date class="post-meta meta-date">
-            2022年10月19日
+            2022年11月12日
         </date>
         
         
         
         <div class="post-content">
-            <h2 id="什么是android">什么是Android?</h2>
-<p><strong>Android 是一个开源的，基于 Linux 的移动设备操作系统，如智能手机和平板电脑。Android 是由谷歌及其他公司带领的开放手机联盟开发的。</strong></p>
-<p><strong>Android 提供了一个统一的应用程序开发方法，这意味着开发人员只需要为 Android 进行开发，这样他们的应用程序就能够运行在不同搭载 Android 的移动设备上。</strong></p>
-<p><strong>谷歌在2007年发布了第一个测试版本的 Android 软件开发工具包（SDK），第一个商业版本的 Android 1.0，则发布于2008年9月。</strong></p>
-<p><strong>2012年6月27日，在谷歌I/O大会上，谷歌宣布发布了 Android 版本4.1 Jelly Bean。 Jelly Bean 是一个在功能和性能方面的渐进的更新，主要目的是改进用户界面，</strong></p>
-<h2 id="android-的特性">Android 的特性</h2>
-<p>Android 是一款与 Apple 4GS 竞争的功能强大的操作系统，并支持一些伟大的特性。以下列举出部分功能：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">特性</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">漂亮的 UI</td>
-<td style="text-align:left">Android 操作系统的基本屏幕提供了漂亮又直观的用户界面。</td>
-</tr>
-<tr>
-<td style="text-align:left">连接性</td>
-<td style="text-align:left">GSM/EDGE, IDEN, CDMA, EV-DO, UMTS, Bluetooth, Wi-Fi, LTE, NFC 和 WiMAX.</td>
-</tr>
-<tr>
-<td style="text-align:left">存储</td>
-<td style="text-align:left">用于数据存储的轻量级关系型数据库SQLite</td>
-</tr>
-<tr>
-<td style="text-align:left">媒体支持</td>
-<td style="text-align:left">H.263, H.264, MPEG-4 SP, AMR, AMR-WB, AAC, HE-AAC, AAC 5.1, MP3, MIDI, Ogg Vorbis, WAV, JPEG, PNG, GIF, 和 BMP</td>
-</tr>
-<tr>
-<td style="text-align:left">消息</td>
-<td style="text-align:left">SMS 和 MMS</td>
-</tr>
-<tr>
-<td style="text-align:left">Web 浏览器</td>
-<td style="text-align:left">基于开源的 WebKit 布局引擎，再加上支持 HTML5 和 CSS3 Chrome 的 V8 JavaScript 引擎。</td>
-</tr>
-<tr>
-<td style="text-align:left">多点触控</td>
-<td style="text-align:left">Android原生支持多点触控，从最初的手持设备开始便有，如 HTC Hero。</td>
-</tr>
-<tr>
-<td style="text-align:left">多任务</td>
-<td style="text-align:left">用户可以跳从一个任务到另一个任务，并且相同时间可以同时运行各种应用。</td>
-</tr>
-<tr>
-<td style="text-align:left">可调整的 widgets</td>
-<td style="text-align:left">Widgets是可调整大小，这样用户就可以扩大更多的内容或缩小以节省空间。</td>
-</tr>
-<tr>
-<td style="text-align:left">多语言</td>
-<td style="text-align:left">支持单向和多向文本。</td>
-</tr>
-<tr>
-<td style="text-align:left">GCM</td>
-<td style="text-align:left">谷歌云消息（GCM）是一种服务，让开发人员对 Android 设备的用户发送短消息数据，而无需专有的同步解决方案。</td>
-</tr>
-<tr>
-<td style="text-align:left">Wi-Fi Direct</td>
-<td style="text-align:left">一种通过高带宽的对等网络连接来直接发现和配对应用的技术。</td>
-</tr>
-<tr>
-<td style="text-align:left">Android Beam</td>
-<td style="text-align:left">一个流行的基于 NFC 的技术，使用户能够即时共享，只需通过触摸 NFC 功能将两个手机连在一起。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="android-架构">Android 架构</h2>
-<p><strong>Android 操作系统是一个软件组件的栈，在架构图中它大致可以分为五个部分和四个主要层。</strong></p>
+            <h2 id="1maven">1，Maven</h2>
+<p>Maven是专门用于管理和构建Java项目的工具，它的主要功能有：</p>
+<ul>
+<li>
+<p>提供了一套标准化的项目结构</p>
+</li>
+<li>
+<p>提供了一套标准化的构建流程（编译，测试，打包，发布……）</p>
+</li>
+<li>
+<p>提供了一套依赖管理机制</p>
+</li>
+</ul>
 <p>
-        <img class="mx-auto" alt="" src="/img/1.png" />   
+        <img class="mx-auto" alt="" src="/img/15.png" />   
     </p>
-<h2 id="linux内核">Linux内核</h2>
-<p><strong>在所有层的最底下是 Linux - 包括大约115个补丁的 Linux 3.6。它提供了基本的系统功能，比如进程管理，内存管理，设备管理（如摄像头，键盘，显示器）。同时，内核处理所有 Linux 所擅长的工作，如网络和大量的设备驱动，从而避免兼容大量外围硬件接口带来的不便。</strong></p>
-<h2 id="android程序库">Android程序库</h2>
-<p><strong>这个类别包括了专门为 Android 开发的基于 Java 的程序库。这个类别程序库的示例包括应用程序框架库，如用户界面构建，图形绘制和数据库访问。一些 Android 开发者可用的 Android 核心程序库总结如下：</strong></p>
+<h3 id="11--maven模型">1.1  Maven模型</h3>
 <ul>
-<li><strong>android.app - 提供应用程序模型的访问，是所有 Android 应用程序的基石。</strong></li>
-<li><strong>android.content - 方便应用程序之间，应用程序组件之间的内容访问，发布，消息传递。</strong></li>
-<li><strong>android.database - 用于访问内容提供者发布的数据，包含 SQLite 数据库管理类。</strong></li>
-<li><strong>android.opengl - OpenGL ES 3D 图片渲染 API 的 Java 接口。</strong></li>
-<li><strong>android.os - 提供应用程序访问标注操作系统服务的能力，包括消息，系统服务和进程间通信。</strong></li>
-<li><strong>android.text - 在设备显示上渲染和操作文本。</strong></li>
-<li><strong>android.view - 应用程序用户界面的基础构建块。</strong></li>
-<li><strong>android.widget - 丰富的预置用户界面组件集合，包括按钮，标签，列表，布局管理，单选按钮等。</strong></li>
-<li><strong>android.webkit - 一系列类的集合，允许为应用程序提供内建的 Web 浏览能力。</strong></li>
+<li>项目对象模型 (Project Object Model)</li>
+<li>依赖管理模型(Dependency)</li>
+<li>插件(Plugin)</li>
 </ul>
-<h2 id="android运行时">Android运行时</h2>
-<p><strong>这是架构中的第三部分，自下而上的第二层。这个部分提供名为 Dalvik 虚拟机的关键组件，类似于 Java 虚拟机，但专门为 Android 设计和优化。</strong></p>
-<p><strong>Dalvik 虚拟机使得可以在 Java 中使用 Linux 核心功能，如内存管理和多线程。Dalvik 虚拟机使得每一个 Android 应用程序运行在自己独立的虚拟机进程。</strong></p>
-<p><strong>Android 运行时同时提供一系列核心的库来为 Android 应用程序开发者使用标准的 Java 语言来编写 Android 应用程序。</strong></p>
-<h2 id="应用框架">应用框架</h2>
-<p><strong>应用框架层以 Java 类的形式为应用程序提供许多高级的服务。应用程序开发者被允许在应用中使用这些服务。</strong></p>
+<p>
+        <img class="mx-auto" alt="" src="/img/16.png" />   
+    </p>
+<p>如上图所示就是Maven的模型，而我们先看紫色框框起来的部分，他就是用来完成 <code>标准化构建流程</code> 。如我们需要编译，Maven提供了一个编译插件供我们使用，我们需要打包，Maven就提供了一个打包插件提供我们使用等。</p>
+<p>
+        <img class="mx-auto" alt="" src="/img/17.png" />   
+    </p>
+<p>上图中紫色框起来的部分，项目对象模型就是将我们自己抽象成一个对象模型，有自己专属的坐标，如下图所示是一个Maven项目：</p>
+<p>
+        <img class="mx-auto" alt="" src="/img/18.png" />   
+    </p>
+<h3 id="12--maven安装配置">1.2  Maven安装配置</h3>
 <ul>
-<li><strong>活动管理者 - 控制应用程序生命周期和活动栈的所有方面。</strong></li>
-<li><strong>内容提供者 - 允许应用程序之间发布和分享数据。</strong></li>
-<li><strong>资源管理器 - 提供对非代码嵌入资源的访问，如字符串，颜色设置和用户界面布局。</strong></li>
-<li><strong>通知管理器 - 允许应用程序显示对话框或者通知给用户。</strong></li>
-<li><strong>视图系统 - 一个可扩展的视图集合，用于创建应用程序用户界面。</strong></li>
+<li>
+<p>解压 apache-maven-3.6.1.rar 既安装完成</p>
+<!-- raw HTML omitted -->
+<blockquote>
+<p>建议解压缩到没有中文、特殊字符的路径下。如课程中解压缩到 <code>D:\software</code> 下。</p>
+</blockquote>
+<p>解压缩后的目录结构如下：</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>bin目录 ： 存放的是可执行命令。mvn 命令重点关注。</li>
+<li>conf目录 ：存放Maven的配置文件。<code>settings.xml</code> 配置文件后期需要修改。</li>
+<li>lib目录 ：存放Maven依赖的jar包。Maven也是使用java开发的，所以它也依赖其他的jar包。</li>
 </ul>
-<hr>
-<h2 id="应用程序">应用程序</h2>
-<p><strong>顶层中有所有的 Android 应用程序。你写的应用程序也将被安装在这层。这些应用程序包括通讯录，浏览器，游戏等。</strong></p>
+</li>
+<li>
+<p>配置环境变量 MAVEN_HOME 为安装路径的bin目录</p>
+<p>修改 conf/settings.xml 中的 <!-- raw HTML omitted --> 为一个指定目录作为本地仓库，用来存储jar包。</p>
+</li>
+</ul>
+<p>
+        <img class="mx-auto" alt="" src="/img/19.png" />   
+    </p>
+<ul>
+<li>
+<p>配置阿里云私服</p>
+<p>中央仓库在国外，所以下载jar包速度可能比较慢，而阿里公司提供了一个远程仓库，里面基本也都有开源项目的jar包。</p>
+<p>修改 conf/settings.xml 中的 <!-- raw HTML omitted -->标签，为其添加如下子标签：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;mirror&gt;</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;id&gt;</span>alimaven<span style="color:#f92672">&lt;/id&gt;</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;name&gt;</span>aliyun maven<span style="color:#f92672">&lt;/name&gt;</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;url&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span style="color:#f92672">&lt;/url&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;mirrorOf&gt;</span>central<span style="color:#f92672">&lt;/mirrorOf&gt;</span>          
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/mirror&gt;</span>	
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="13--maven基本使用">1.3  Maven基本使用</h3>
+<h4 id="131--maven-常用命令">1.3.1  Maven 常用命令</h4>
+<blockquote>
+<ul>
+<li>
+<p>compile ：编译</p>
+</li>
+<li>
+<p>clean：清理</p>
+</li>
+<li>
+<p>test：测试</p>
+</li>
+<li>
+<p>package：打包</p>
+</li>
+<li>
+<p>install：安装</p>
+</li>
+</ul>
+</blockquote>
+<p><strong>命令演示：</strong></p>
+<p>在 <code>资料\代码\maven-project</code> 提供了一个使用Maven构建的项目，项目结构如下：</p>
+<p>
+        <img class="mx-auto" alt="" src="/img/20.png" />   
+    </p>
+<p>而我们使用上面命令需要在磁盘上进入到项目的 <code>pom.xml</code> 目录下，打开命令提示符</p>
+<p><strong>编译命令演示：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>compile <span style="color:#960050;background-color:#1e0010">：</span>编译
+</span></span></code></pre></div><p>执行上述命令可以看到：</p>
+<ul>
+<li>从阿里云下载编译需要的插件的jar包，在本地仓库也能看到下载好的插件</li>
+<li>在项目下会生成一个 <code>target</code> 目录</li>
+</ul>
+<p>
+        <img class="mx-auto" alt="" src="/img/21.png" />   
+    </p>
+<p>同时在项目下会出现一个 <code>target</code> 目录，编译后的字节码文件就放在该目录下</p>
+<p><strong>清理命令演示：</strong></p>
+<pre tabindex="0"><code>mvn clean
+</code></pre><p>执行上述命令可以看到</p>
+<ul>
+<li>从阿里云下载清理需要的插件jar包</li>
+<li>删除项目下的 <code>target</code> 目录</li>
+</ul>
+<p><strong>打包命令演示：</strong></p>
+<pre tabindex="0"><code>mvn package
+</code></pre><p>执行上述命令可以看到：</p>
+<ul>
+<li>从阿里云下载打包需要的插件jar包</li>
+<li>在项目的 <code>terget</code> 目录下有一个jar包（将当前项目打成的jar包）</li>
+</ul>
+<p><strong>测试命令演示：</strong></p>
+<pre tabindex="0"><code>mvn test  
+</code></pre><p>该命令会执行所有的测试代码。执行上述命令效果如下</p>
+<p>
+        <img class="mx-auto" alt="" src="/img/23.png" />   
+    </p>
+<p><strong>安装命令演示：</strong></p>
+<pre tabindex="0"><code>mvn install
+</code></pre><p>该命令会将当前项目打成jar包，并安装到本地仓库。执行完上述命令后到本地仓库查看结果如下：</p>
+<p>
+        <img class="mx-auto" alt="" src="/img/22.png" />   
+    </p>
         </div>
 
         

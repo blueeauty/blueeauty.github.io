@@ -2,13 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blueeauty.github.io/posts/android_develop_first/</loc>
-    <lastmod>2022-10-19T23:07:50+08:00</lastmod>
+    <loc>https://blueeauty.github.io/posts/java_maven_1/</loc>
+    <lastmod>2022-11-12T16:44:24+08:00</lastmod>
   </url><url>
     <loc>https://blueeauty.github.io/posts/</loc>
-    <lastmod>2022-10-19T23:07:50+08:00</lastmod>
+    <lastmod>2022-11-12T16:44:24+08:00</lastmod>
   </url><url>
     <loc>https://blueeauty.github.io/</loc>
+    <lastmod>2022-11-12T16:44:24+08:00</lastmod>
+  </url><url>
+    <loc>https://blueeauty.github.io/posts/java_jdbc_1/</loc>
+    <lastmod>2022-11-11T13:00:36+08:00</lastmod>
+  </url><url>
+    <loc>https://blueeauty.github.io/posts/android_develop_third/</loc>
+    <lastmod>2022-11-10T14:20:02+08:00</lastmod>
+  </url><url>
+    <loc>https://blueeauty.github.io/posts/android_develop_second/</loc>
+    <lastmod>2022-11-10T12:36:17+08:00</lastmod>
+  </url><url>
+    <loc>https://blueeauty.github.io/posts/android_develop_first/</loc>
     <lastmod>2022-10-19T23:07:50+08:00</lastmod>
   </url><url>
     <loc>https://blueeauty.github.io/tags/hugo/</loc>

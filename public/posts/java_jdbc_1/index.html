@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Java之JDBC | 学习记录</title>
+    <meta property="og:title" content="Java之JDBC - 学习记录">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2022-11-11T13:00:36&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-11-11T13:00:36&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="Java之JDBC">
+        
+    <meta name="author" content="">
+    <meta property="og:url" content="https://blueeauty.github.io/posts/java_jdbc_1/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+</head>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://blueeauty.github.io/">
+                        学习记录
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://blueeauty.github.io/">首页</a>
+                    
+                    <a  href="https://blueeauty.github.io/about" title="About">About</a>
+                    
+                    <a  href="https://blueeauty.github.io/tags/others" title="Others">Others</a>
+                    
+                    <a  href="https://blueeauty.github.io/tags/machine-learning" title="Machine Learning">Machine Learning</a>
+                    
+                    <a  href="https://blueeauty.github.io/" title="Home">Home</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">Java之JDBC</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年11月11日
+        </date>
+        
+        
+        
+        <div class="post-content">
+            <h2 id="jdbc">JDBC</h2>
+<p>什么是JDBC？JDBC是Java DataBase Connectivity的缩写，它是Java程序访问数据库的标准接口。</p>
+<p>使用Java程序访问数据库时，Java代码并不是直接通过TCP连接去访问数据库，而是通过JDBC接口来访问，而JDBC接口则通过JDBC驱动来实现真正对数据库的访问。</p>
+<p>例如，我们在Java代码中如果要访问MySQL，那么必须编写代码操作JDBC接口。注意到JDBC接口是Java标准库自带的，所以可以直接编译。而具体的JDBC驱动是由数据库厂商提供的，例如，MySQL的JDBC驱动由Oracle提供。因此，访问某个具体的数据库，我们只需要引入该厂商提供的JDBC驱动，就可以通过JDBC接口来访问，这样保证了Java程序编写的是一套数据库访问代码，却可以访问各种不同的数据库，因为他们都提供了标准的JDBC驱动：</p>
+<pre tabindex="0"><code class="language-ascii" data-lang="ascii">┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐
+
+│  ┌───────────────┐  │
+   │   Java App    │
+│  └───────────────┘  │
+           │
+│          ▼          │
+   ┌───────────────┐
+│  │JDBC Interface │◀─┼─── JDK
+   └───────────────┘
+│          │          │
+           ▼
+│  ┌───────────────┐  │
+   │  JDBC Driver  │◀───── Vendor
+│  └───────────────┘  │
+           │
+└ ─ ─ ─ ─ ─│─ ─ ─ ─ ─ ┘
+           ▼
+   ┌───────────────┐
+   │   Database    │
+   └───────────────┘
+</code></pre><p>实际上，一个MySQL的JDBC的驱动就是一个jar包，它本身也是纯Java编写的。我们自己编写的代码只需要引用Java标准库提供的java.sql包下面的相关接口，由此再间接地通过MySQL驱动的jar包通过网络访问MySQL服务器，所有复杂的网络通讯都被封装到JDBC驱动中，因此，Java程序本身只需要引入一个MySQL驱动的jar包就可以正常访问MySQL服务器：</p>
+<pre tabindex="0"><code class="language-ascii" data-lang="ascii">┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐
+   ┌───────────────┐
+│  │   App.class   │  │
+   └───────────────┘
+│          │          │
+           ▼
+│  ┌───────────────┐  │
+   │  java.sql.*   │
+│  └───────────────┘  │
+           │
+│          ▼          │
+   ┌───────────────┐     TCP    ┌───────────────┐
+│  │ mysql-xxx.jar │──┼────────▶│     MySQL     │
+   └───────────────┘            └───────────────┘
+└ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┘
+          JVM
+</code></pre><h3 id="快速入门">快速入门</h3>
+<ol>
+<li>创建工程，导入驱动jar包</li>
+<li>注册驱动 Class.forName(&ldquo;com.mysql.jdbc.Driver&rdquo;);</li>
+<li>获取连接 Connection conn=DirverManager.getConnection(url,username,password);</li>
+<li>定义SQL语句 String sql=&ldquo;update&hellip;&rdquo;;</li>
+<li>获取执行SQL语句 Statement stmt=conn.createStatement();</li>
+<li>执行SQL stmt.executeUpdate(sql);</li>
+<li>处理返回结果</li>
+<li>释放资源</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.itheima.jdbc<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.mysql.jdbc.Driver<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.Connection<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.DriverManager<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.sql.Statement<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">JDBCDemo</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//1.注册驱动
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.mysql.jdbc.Driver&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>	    <span style="color:#75715e">//mysql5之后，上面代码可以不写
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">//2.获取连接
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        String url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jdbc:mysql://127.0.0.1:3306/chip&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        String username<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;root&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        String password<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;root&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        Connection conn<span style="color:#f92672">=</span>DriverManager<span style="color:#f92672">.</span><span style="color:#a6e22e">getConnection</span><span style="color:#f92672">(</span>url<span style="color:#f92672">,</span>username<span style="color:#f92672">,</span>password<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//3.定义sql
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        String sql<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;update operator set chip_num=1000 where operator_index=3&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//4.获取执行sql的对象Statement
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        Statement stmt<span style="color:#f92672">=</span>conn<span style="color:#f92672">.</span><span style="color:#a6e22e">createStatement</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//5.执行sql
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> count<span style="color:#f92672">=</span>stmt<span style="color:#f92672">.</span><span style="color:#a6e22e">executeUpdate</span><span style="color:#f92672">(</span>sql<span style="color:#f92672">);</span><span style="color:#75715e">//受影响的行数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//处理结果
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>count<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//7.释放资源
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        stmt<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        conn<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="jdbc-api详解">JDBC API详解</h2>
+<h3 id="drivermanager">DriverManager</h3>
+<p>DriverManager(驱动管理类)</p>
+<p>作用:</p>
+<p>1、注册驱动</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;com.mysql.jdbc.Driver&#34;</span><span style="color:#f92672">);</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>查看Driver源码</p>
+<p>
+        <img class="mx-auto" alt="" src="/img/13.png" />   
+    </p>
+<p>提示</p>
+<ul>
+<li>MYSQL5之后的驱动包，可以省略注册驱动的步骤</li>
+<li>自动加载jar包中META-INF/services/java.sql.Driver文件中的驱动类</li>
+</ul>
+</li>
+</ul>
+<p>2、获取数据库的连接对象</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> Connection				<span style="color:#a6e22e">getConnection</span><span style="color:#f92672">(</span>String url<span style="color:#f92672">,</span>String user<span style="color:#f92672">,</span>String password<span style="color:#f92672">)</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>参数</p>
+<ol>
+<li>url:	连接路径</li>
+</ol>
+<pre tabindex="0"><code>语法：jdbc:mysql://ip地址(域名):端口号/数据库名称?参数键值对1&amp;参数键值对2...
+示例:	jdbc:mysql://127.0.0.1:3306/db1
+细节:
+如果连接的是本机mysql服务器，并且mysql服务器默认端口是3306，则url可以简写为: jdbc:mysql:///数据库名称?参数键值对
+配置useSSL=false参数，禁用安全连接方式，解决警告提示
+</code></pre><ol start="2">
+<li>
+<p>user:	用户名</p>
+</li>
+<li>
+<p>password:    密码</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="connection">Connection</h3>
+<p><strong>1.获取执行SQL对象</strong></p>
+<ul>
+<li>
+<p>普通执行SQL对象</p>
+<pre tabindex="0"><code>Statement createStatement()
+</code></pre></li>
+<li>
+<p>预编译SQL的执行SQL对象:防止SQL注入</p>
+<pre tabindex="0"><code>PreparedStatement prepareStatement(sql)
+</code></pre></li>
+<li>
+<p>执行存储过程的对象</p>
+<pre tabindex="0"><code>CallableStatement prepareCall(sql)
+</code></pre></li>
+</ul>
+<p><strong>2.事务管理</strong></p>
+<ul>
+<li>
+<p>MySQL事务管理</p>
+<pre tabindex="0"><code>开启事务: BEGIN：/START TRANSACTION;
+提交事务: COMMIT;
+回滚事务: ROLLBACK
+
+MySQL默认自动提交事务
+</code></pre></li>
+<li>
+<p>JDBC事务管理: Connection接口中定义了3个对应的方法</p>
+<pre tabindex="0"><code>开启事务: setAutoCommit(boolean autoCommit); true为自动提交事务，false为手动提交事务，即为开启事务
+提交事务: commit()
+回滚事务: rollback()
+</code></pre></li>
+</ul>
+<h3 id="statement">Statement</h3>
+<p>Statement作用:</p>
+<p><strong>1、执行SQL语句</strong></p>
+<ul>
+<li>
+<p>执行SQL语句</p>
+<pre tabindex="0"><code>int executeUpdate(sql);	执行DML、DDL语句
+=》	返回值：(1)DML语句影响的行数 (2)DDL语句执行后，执行成功也可能返回0
+
+ResultSet executeQuery(sql): 执行DQL语句
+=&gt; 	返回值： ResultSet结果集对象
+</code></pre></li>
+</ul>
+<h3 id="resultset">ResultSet</h3>
+<ul>
+<li>
+<p>ResultSet(结果集对象)作用：</p>
+<ol>
+<li>
+<p>​	封装了DQL查询语句的结果</p>
+<pre tabindex="0"><code>ResultSet	stmt.executeQuery(sql):	执行DQL语句，返回ResultSet对象
+</code></pre></li>
+</ol>
+</li>
+<li>
+<p>获取查询结果</p>
+<pre tabindex="0"><code>boolean next():	(1)将光标从当前位置向前移动一行	(2)判断当前行是否为有效行
+=》	返回值
+	true:	有效行，当前行有数据
+	false:	无效行，当前行没有数据
+
+xxx	getXxx(参数):	获取数据
+=》	xxx:	数据类型；如:	int getInt(参数);String getString(参数)
+=&gt;	参数:
+	int:	列的编号,从1开始
+	String:	列的名称
+</code></pre></li>
+<li>
+<p>使用步骤:</p>
+<p>1.游标向下移动一行，并判断该行是否有数据：next()</p>
+<p>2.获取数据:	getXxx(参数)</p>
+<pre tabindex="0"><code>//循环判断游标是否最后一行末尾
+while(rs.next()){
+	//获取数据
+	rs.getXxx(参数);
+}
+</code></pre></li>
+</ul>
+<pre tabindex="0"><code>package com.itheima.jdbc;
+
+
+import org.junit.Test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+/**
+ * JDBC API 详解: ResultSet
+ */
+
+public class JDBCDemo5_ResultSet {
+    /**
+     * 执行DQL查询语句
+     * @throws Exception
+     */
+
+    @Test
+    public void testResultRet() throws Exception {
+        //1.注册驱动
+        //Class.forName(&#34;com.mysql.jdbc.Driver&#34;);
+
+        //2.获取连接
+        String url=&#34;jdbc:mysql:///chip?useSSL=false&#34;;
+        String username=&#34;root&#34;;
+        String password=&#34;root&#34;;
+        Connection conn=DriverManager.getConnection(url,username,password);
+
+        //3.定义sql
+        String sql=&#34;select * from operator&#34;;
+
+        //4.获取statement对象
+        Statement stmt=conn.createStatement();
+
+        //5.执行sql
+        ResultSet rs=stmt.executeQuery(sql);
+
+        //6.处理结果，遍历rs中的所有数据
+        //6.1 光标向下移动一行，并且判断当前行是否有数据
+        while (rs.next()){
+            //6.2 获取数据
+//            int id=rs.getInt(1);
+//            String name=rs.getString(2);
+//            int num=rs.getInt(3);
+
+            int id=rs.getInt(&#34;operator_index&#34;);
+            String name=rs.getString(&#34;student_name&#34;);
+            int num=rs.getInt(&#34;chip_num&#34;);
+            System.out.println(id);
+            System.out.println(name);
+            System.out.println(num);
+            System.out.println(&#34;------------&#34;);
+        }
+
+        //7.释放资源
+        rs.close();
+        stmt.close();
+        conn.close();
+    }
+
+}
+</code></pre><h3 id="preparedstatement">PreparedStatement</h3>
+<ul>
+<li>
+<p>PreparedStatement作用</p>
+<p>1.预编译SQL并执行SQL语句</p>
+<p>一、获取PreparedStatement对象</p>
+<pre tabindex="0"><code>//SQL语句中的参数值，使用?占位符替代
+String sql=&#34;select * from user where username =? and password = ?&#34;;
+
+//通过Connection对象获取，并传入对应的sql语句
+PreparedStatement pstmt=conn.prepareStatement(sql);
+</code></pre><p>二、设置参数值</p>
+<pre tabindex="0"><code>PreparedStatement对象:	setXxx(参数1，参数2):给？赋值
+=》	Xxx:	数据类型；	如setInt(参数1,参数2)
+=》	参数:
+	参数1：?的位置编号，从1开始
+	参数2: ?的值
+</code></pre><p>三、执行SQL</p>
+<pre tabindex="0"><code>executeUpdate();/executeQuery();	:不需要再传递sql
+</code></pre></li>
+</ul>
+<p>PreparedStatement 好处：</p>
+<ul>
+<li>预编译SQL，性能更高</li>
+<li>防止SQL注入：==将敏感字符进行转义==</li>
+</ul>
+<p>
+        <img class="mx-auto" alt="" src="/img/14.png" />   
+    </p>
+<p>Java代码操作数据库流程如图所示：</p>
+<ul>
+<li>
+<p>将sql语句发送到MySQL服务器端</p>
+</li>
+<li>
+<p>MySQL服务端会对sql语句进行如下操作</p>
+<ul>
+<li>
+<p>检查SQL语句</p>
+<p>检查SQL语句的语法是否正确。</p>
+</li>
+<li>
+<p>编译SQL语句。将SQL语句编译成可执行的函数。</p>
+<p>检查SQL和编译SQL花费的时间比执行SQL的时间还要长。如果我们只是重新设置参数，那么检查SQL语句和编译SQL语句将不需要重复执行。这样就提高了性能。</p>
+</li>
+<li>
+<p>执行SQL语句</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>接下来我们通过查询日志来看一下原理。</p>
+<ul>
+<li>
+<p>开启预编译功能</p>
+<p>在代码中编写url时需要加上以下参数。而我们之前根本就没有开启预编译功能，只是解决了SQL注入漏洞。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>useServerPrepStmts<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+</span></span></code></pre></div></li>
+<li>
+<p>配置MySQL执行日志（重启mysql服务后生效）</p>
+<p>在mysql配置文件（my.ini）中添加如下配置</p>
+<pre tabindex="0"><code>log-output=FILE
+general-log=1
+general_log_file=&#34;D:\mysql.log&#34;
+slow-query-log=1
+slow_query_log_file=&#34;D:\mysql_slow.log&#34;
+long_query_time=2
+</code></pre></li>
+<li>
+<p>java测试代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span> <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * PreparedStatement原理
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   * @throws Exception
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">   */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Test</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testPreparedStatement2</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span>  Exception <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//2. 获取连接：如果连接的是本机mysql并且端口是默认的 3306 可以简化书写
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// useServerPrepStmts=true 参数开启预编译功能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    String url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;jdbc:mysql:///db1?useSSL=false&amp;useServerPrepStmts=true&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    String username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;root&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    String password <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1234&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    Connection conn <span style="color:#f92672">=</span> DriverManager<span style="color:#f92672">.</span><span style="color:#a6e22e">getConnection</span><span style="color:#f92672">(</span>url<span style="color:#f92672">,</span> username<span style="color:#f92672">,</span> password<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 接收用户输入 用户名和密码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    String name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;zhangsan&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    String pwd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#39; or &#39;1&#39; = &#39;1&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 定义sql
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    String sql <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;select * from tb_user where username = ? and password = ?&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 获取pstmt对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    PreparedStatement pstmt <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span><span style="color:#a6e22e">prepareStatement</span><span style="color:#f92672">(</span>sql<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>10000<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 设置？的值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    pstmt<span style="color:#f92672">.</span><span style="color:#a6e22e">setString</span><span style="color:#f92672">(</span>1<span style="color:#f92672">,</span>name<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    pstmt<span style="color:#f92672">.</span><span style="color:#a6e22e">setString</span><span style="color:#f92672">(</span>2<span style="color:#f92672">,</span>pwd<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    ResultSet rs <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 执行sql
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    rs <span style="color:#f92672">=</span> pstmt<span style="color:#f92672">.</span><span style="color:#a6e22e">executeQuery</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 设置？的值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    pstmt<span style="color:#f92672">.</span><span style="color:#a6e22e">setString</span><span style="color:#f92672">(</span>1<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;aaa&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    pstmt<span style="color:#f92672">.</span><span style="color:#a6e22e">setString</span><span style="color:#f92672">(</span>2<span style="color:#f92672">,</span><span style="color:#e6db74">&#34;bbb&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 执行sql
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    rs <span style="color:#f92672">=</span> pstmt<span style="color:#f92672">.</span><span style="color:#a6e22e">executeQuery</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 判断登录是否成功
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>rs<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">()){</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;登录成功~&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;登录失败~&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//7. 释放资源
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    rs<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    pstmt<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="数据库连接池">数据库连接池</h3>
+<blockquote>
+<ul>
+<li>
+<p>数据库连接池是个容器，负责分配、管理数据库连接(Connection)</p>
+</li>
+<li>
+<p>它允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个；</p>
+</li>
+<li>
+<p>释放空闲时间超过最大空闲时间的数据库连接来避免因为没有释放数据库连接而引起的数据库连接遗漏</p>
+</li>
+<li>
+<p>好处</p>
+</li>
+<li>
+<p>资源重用</p>
+</li>
+<li>
+<p>提升系统响应速度</p>
+</li>
+<li>
+<p>避免数据库连接遗漏</p>
+</li>
+</ul>
+</blockquote>
+        </div>
+
+        
+
+
+        
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= ""
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+    
+    
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2022 <a href="https://blueeauty.github.io/">学习记录 By </a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+<style type="text/css">
+div.highlight {
+    position: relative;
+    margin: 1em 0px;
+}
+
+.copy-code {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(78, 78, 78, 0.8);
+    border-radius: var(--radius);
+    padding: 0 5px;
+    font: inherit;
+    user-select: none;
+    cursor: pointer;
+    border: 0;
+    --radius: 8px;
+}
+
+div.highlight:hover .copy-code,pre:hover .copy-code {
+    display: block;
+}
+
+</style>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://blueeauty.github.io/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://blueeauty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://blueeauty.github.io/posts/java_maven_1/" title="Java之Maven" target="_blank">Java之Maven</a>
+    </li>
+    
+    <li>
+        <a href="https://blueeauty.github.io/posts/java_jdbc_1/" title="Java之JDBC" target="_blank">Java之JDBC</a>
+    </li>
+    
+    <li>
+        <a href="https://blueeauty.github.io/posts/android_develop_third/" title="Android四大组件" target="_blank">Android四大组件</a>
+    </li>
+    
+    <li>
+        <a href="https://blueeauty.github.io/posts/android_develop_second/" title="Android应用程序组件" target="_blank">Android应用程序组件</a>
+    </li>
+    
+    <li>
+        <a href="https://blueeauty.github.io/posts/android_develop_first/" title="Android架构" target="_blank">Android架构</a>
+    </li>
+    
+    <li>
+        <a href="https://blueeauty.github.io/posts/my-first-post/" title="hugo 博客搭建" target="_blank">hugo 博客搭建</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://blueeauty.github.io/tags/hugo/">hugo</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://blueeauty.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -6,9 +6,45 @@
     <description>Recent content in Posts on 学习记录</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Oct 2022 23:07:50 +0800</lastBuildDate><atom:link href="https://blueeauty.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Nov 2022 16:44:24 +0800</lastBuildDate><atom:link href="https://blueeauty.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Android_develop_first</title>
+      <title>Java之Maven</title>
+      <link>https://blueeauty.github.io/posts/java_maven_1/</link>
+      <pubDate>Sat, 12 Nov 2022 16:44:24 +0800</pubDate>
+      
+      <guid>https://blueeauty.github.io/posts/java_maven_1/</guid>
+      <description>&lt;h2 id=&#34;1maven&#34;&gt;1，Maven&lt;/h2&gt;</description>
+    </item>
+    
+    <item>
+      <title>Java之JDBC</title>
+      <link>https://blueeauty.github.io/posts/java_jdbc_1/</link>
+      <pubDate>Fri, 11 Nov 2022 13:00:36 +0800</pubDate>
+      
+      <guid>https://blueeauty.github.io/posts/java_jdbc_1/</guid>
+      <description>&lt;h2 id=&#34;jdbc&#34;&gt;JDBC&lt;/h2&gt;</description>
+    </item>
+    
+    <item>
+      <title>Android四大组件</title>
+      <link>https://blueeauty.github.io/posts/android_develop_third/</link>
+      <pubDate>Thu, 10 Nov 2022 14:20:02 +0800</pubDate>
+      
+      <guid>https://blueeauty.github.io/posts/android_develop_third/</guid>
+      <description>&lt;h2 id=&#34;android四大组件&#34;&gt;Android四大组件&lt;/h2&gt;</description>
+    </item>
+    
+    <item>
+      <title>Android应用程序组件</title>
+      <link>https://blueeauty.github.io/posts/android_develop_second/</link>
+      <pubDate>Thu, 10 Nov 2022 12:36:17 +0800</pubDate>
+      
+      <guid>https://blueeauty.github.io/posts/android_develop_second/</guid>
+      <description>&lt;h2 id=&#34;android-应用程序组件&#34;&gt;Android 应用程序组件&lt;/h2&gt;</description>
+    </item>
+    
+    <item>
+      <title>Android架构</title>
       <link>https://blueeauty.github.io/posts/android_develop_first/</link>
       <pubDate>Wed, 19 Oct 2022 23:07:50 +0800</pubDate>
       
